@@ -13,7 +13,7 @@ url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}'
 response = requests.get(url)
 
 if response.status_code == 200:
-    # Parse the response body as JSON data and store in data variable which now
+    # Read the response body as JSON data and store in data variable which now
     # Contains a python dictionary.
     data = response.json()
     # Subtract 273.15 from kelvin value to get celcius
