@@ -11,7 +11,8 @@ token = "token"
 city = input('City: ')
 
 # URL we use in our HTTP request, using our api key and city values.
-url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric'
+url = (f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid='
+       f'{api_key}&units=metric')
 
 # Make request to openweathermap, store response body in response variable.
 response = requests.get(url)
@@ -24,7 +25,8 @@ if response.status_code == 200:
     temp = data['main']['temp']
     desc = data['weather'][0]['description']
     telegram_message = f"{temp} C\n {desc}"
-    message = f"https://api.telegram.org/bot{token}/sendMessage?chat_id={chat_id}&text={telegram_message}"
+    message = (f"https://api.telegram.org/bot{token}/sendMessage?chat_id="
+               f"{chat_id}&text={telegram_message}")
     requests.get(message)
     print(f"{data}")
     # print our temperature from 'main' dictionary using the key 'temp', convert

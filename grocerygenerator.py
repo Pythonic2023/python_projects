@@ -1,4 +1,6 @@
 import random
+import requests
+import datetime as dt
 
 
 def shuffle_list(main_dish, side_dish):
@@ -9,12 +11,27 @@ def shuffle_list(main_dish, side_dish):
 
 
 def finished_list(main, sides):
-    """Print our finished list, if waffles make sides equal to bacon and hash brown"""
+    """Print our finished list, if waffles make sides equal to bacon and
+    hash brown"""
+    # Provide chat id and token to message on telegram
+    chat_id = ""
+    token = ""
+    todays_date = f"TODAY'S DATE: {dt.date.today()}"
+    date_message = (f"https://api.telegram.org/bot{token}/sendMessage?chat_id="
+                    f"{chat_id}&text={todays_date}")
+    requests.get(date_message)
     for main, sides in zip(main[:7], sides):
-        if main == 'waffles':
+        if main[:7] == 'waffles':
             sides = 'bacon hash brown'
+            list_message = (f"https://api.telegram.org/bot{token}"
+                            f"/sendMessage?chat_id={chat_id}&text={main}, {sides}")
+            requests.get(list_message)
             print(f"{main} {sides}")
-        print(f"{main} {sides}")
+        else:
+            print(f"{main} {sides}")
+            message = (f"https://api.telegram.org/bot{token}"
+                       f"/sendMessage?chat_id={chat_id}&text={main}, {sides}")
+            requests.get(message)
 
 
 # Main dishes
